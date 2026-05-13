@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AniRec — Anime & Manga Recommendations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <h1>AniRec</h1>
+            <p class="tagline">Discover your next favourite series</p>
+        </div>
+    </header>
+
+    <main>
+        <div id="boxes">
+
+            <section id="Previously-Viewed">
+                <h2>Already Watched / Read</h2>
+                <p class="section-hint">Separate titles with commas — these will be excluded</p>
+                <textarea
+                    id="viewed-anime"
+                    placeholder="Attack on Titan, Naruto, Death Note..."
+                    spellcheck="false"
+                ></textarea>
+            </section>
+
+            <section id="Genre-Preferences">
+                <h2>Genre Preferences</h2>
+                <p class="section-hint">Enter one or more genres you enjoy</p>
+                <textarea
+                    id="genre-preferences"
+                    placeholder="Action, Fantasy, Mystery, Romance..."
+                    spellcheck="false"
+                ></textarea>
+            </section>
+
+            <div class="controls-row">
+                <div class="filter-group">
+                    <span class="filter-label">Source</span>
+                    <label class="toggle-label">
+                        <input type="radio" name="source-filter" value="all" checked>
+                        <span>All</span>
+                    </label>
+                    <label class="toggle-label">
+                        <input type="radio" name="source-filter" value="anime">
+                        <span>Anime Only</span>
+                    </label>
+                    <label class="toggle-label">
+                        <input type="radio" name="source-filter" value="manga">
+                        <span>Manga / Manhwa / Manhua</span>
+                    </label>
+                </div>
+
+                <div class="filter-divider"></div>
+
+                <div class="filter-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="nsfw-filter">
+                        <span>Exclude NSFW &amp; Ecchi</span>
+                    </label>
+                </div>
+
+                <button id="submit-btn">
+                    <span class="btn-text">Get Recommendations</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+            </div>
+
+            <section id="Recommendations" class="hidden">
+                <div class="rec-header">
+                    <h2>Recommendations</h2>
+                    <span id="rec-count" class="rec-count-badge"></span>
+                </div>
+                <div id="recommendation-list"></div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

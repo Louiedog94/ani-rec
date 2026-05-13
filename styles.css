@@ -1,0 +1,554 @@
+/* ============================================================
+   AniRec — Dark Editorial Anime Theme
+   Design: Deep ink blacks + crimson/gold accent palette.
+   Typefaces: Syne (display) + Figtree (body)
+   ============================================================ */
+
+/* ── Custom Font ─────────────────────────────────────────── */
+@font-face {
+    font-family: 'PerfectAction';
+    src: url("fonts/PerfectActionDemo-drdqX.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ── Design Tokens ───────────────────────────────────────── */
+:root {
+    /* Backgrounds */
+    --bg:           #08090f;
+    --surface:      #0e1018;
+    --surface-2:    #141620;
+    --surface-3:    #1c1f2e;
+
+    /* Borders */
+    --border:       rgba(255,255,255,0.07);
+    --border-hover: rgba(220,60,60,0.35);
+    --border-focus: rgba(220,60,60,0.5);
+
+    /* Accent — deep crimson/scarlet */
+    --accent:       #dc3c3c;
+    --accent-dim:   #a82e2e;
+    --accent-glow:  rgba(220,60,60,0.25);
+
+    /* Gold secondary */
+    --gold:         #c9a84c;
+    --gold-dim:     rgba(201,168,76,0.15);
+
+    /* Badge colours */
+    --col-anime:    #e8554e;
+    --col-manga:    #4e9be8;
+    --col-manhwa:   #48c78e;
+    --col-manhua:   #c06ecf;
+    --col-movie:    #e8a54e;
+
+    /* Text */
+    --text:         #dde0ef;
+    --text-muted:   #636578;
+    --text-dim:     #8f92a8;
+
+    /* Shape */
+    --radius:       12px;
+    --radius-sm:    7px;
+    --radius-xs:    4px;
+
+    /* Transitions */
+    --ease:         cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Base ────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'PerfectAction', 'Syne', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+
+    /* Subtle noise grain */
+    background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(220,60,60,0.08) 0%, transparent 70%);
+}
+
+.hidden { display: none !important; }
+
+/* ── Header ──────────────────────────────────────────────── */
+header {
+    position: relative;
+    height: 38vh;
+    min-height: 200px;
+    max-height: 380px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--bg);
+    background-image: url("images/angry-panda-logo--812-1536x1025.jpg");
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+}
+
+.header-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(8,9,15,0.15) 0%,
+        rgba(8,9,15,0.55) 55%,
+        rgba(8,9,15,1)    100%
+    );
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'PerfectAction', 'Syne', sans-serif;
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    /* Slight glow */
+    text-shadow:
+        0 0 60px rgba(220,60,60,0.5),
+        0 2px 4px rgba(0,0,0,0.6);
+
+    animation: headerReveal 0.8s var(--ease) both;
+}
+
+@keyframes headerReveal {
+    from { opacity: 0; transform: translateY(20px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.tagline {
+    margin-top: 6px;
+    font-family: 'PerfectAction', 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    animation: headerReveal 0.8s 0.15s var(--ease) both;
+}
+
+/* ── Main Layout ─────────────────────────────────────────── */
+main {
+    padding: 40px 24px 100px;
+}
+
+#boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+/* ── Input Sections ──────────────────────────────────────── */
+#Previously-Viewed,
+#Genre-Preferences {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    transition: border-color 0.2s;
+}
+
+#Previously-Viewed:focus-within,
+#Genre-Preferences:focus-within {
+    border-color: var(--border-focus);
+}
+
+section h2 {
+    font-family: 'PerfectAction', 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 5px;
+}
+
+.section-hint {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+}
+
+/* ── Textarea ────────────────────────────────────────────── */
+textarea {
+    width: 100%;
+    min-height: 110px;
+    padding: 12px 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: 'PerfectAction', 'Syne', sans-serif;
+    font-size: 0.875rem;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+textarea::placeholder { color: var(--text-muted); }
+
+textarea:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+textarea.input-error {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+    animation: shake 0.35s ease;
+}
+
+@keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20%      { transform: translateX(-6px); }
+    60%      { transform: translateX(6px); }
+    80%      { transform: translateX(-3px); }
+}
+
+/* ── Controls Row ────────────────────────────────────────── */
+.controls-row {
+    grid-column: 1 / span 2;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 24px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.filter-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    user-select: none;
+    transition: color 0.15s;
+}
+
+.toggle-label:hover { color: var(--text); }
+
+.toggle-label input[type="radio"],
+.toggle-label input[type="checkbox"] {
+    accent-color: var(--accent);
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.filter-divider {
+    width: 1px;
+    height: 26px;
+    background: var(--border);
+    flex-shrink: 0;
+}
+
+/* ── Submit Button ───────────────────────────────────────── */
+#submit-btn {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    font-family: 'PerfectAction', 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    padding: 12px 26px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition: background 0.2s, transform 0.12s, box-shadow 0.2s;
+}
+
+#submit-btn:hover {
+    background: #e84a4a;
+    box-shadow: 0 4px 24px var(--accent-glow);
+}
+
+#submit-btn:active {
+    transform: scale(0.96);
+    box-shadow: none;
+}
+
+.btn-arrow {
+    font-size: 1rem;
+    transition: transform 0.2s var(--ease);
+}
+
+#submit-btn:hover .btn-arrow {
+    transform: translateX(3px);
+}
+
+/* ── Recommendations Section ─────────────────────────────── */
+#Recommendations {
+    grid-column: 1 / span 2;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.rec-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+.rec-header h2 {
+    font-family: 'PerfectAction', 'Syne', sans-serif;;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+}
+
+.rec-count-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    background: var(--gold-dim);
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 20px;
+}
+
+/* ── Recommendation Grid ─────────────────────────────────── */
+#recommendation-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 14px;
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+.rec-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    opacity: 0;
+    animation: cardIn 0.4s var(--ease) forwards;
+
+    transition: border-color 0.2s, transform 0.2s var(--ease), box-shadow 0.2s;
+    cursor: default;
+}
+
+.rec-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.45), 0 0 0 1px var(--border-hover);
+}
+
+@keyframes cardIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Card top row */
+.rec-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.rec-title {
+    font-family: 'PerfectAction', 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    color: var(--text);
+}
+
+.rec-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.score-history {
+    font-size: 0.7rem;
+    color: var(--gold);
+    margin-left: 2px;
+}
+
+/* ── Badges ──────────────────────────────────────────────── */
+.badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 7px;
+    border-radius: var(--radius-xs);
+    white-space: nowrap;
+}
+
+.badge-anime  { background: rgba(232,85,78,0.12);  color: var(--col-anime);   border: 1px solid rgba(232,85,78,0.25); }
+.badge-manga  { background: rgba(78,155,232,0.12); color: var(--col-manga);   border: 1px solid rgba(78,155,232,0.25); }
+.badge-manhwa { background: rgba(72,199,142,0.12); color: var(--col-manhwa);  border: 1px solid rgba(72,199,142,0.25); }
+.badge-manhua { background: rgba(192,110,207,0.12);color: var(--col-manhua);  border: 1px solid rgba(192,110,207,0.25); }
+.badge-movie  { background: rgba(232,165,78,0.12); color: var(--col-movie);   border: 1px solid rgba(232,165,78,0.25); }
+
+/* ── Genre Tags ──────────────────────────────────────────── */
+.rec-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.genre-tag {
+    font-size: 0.7rem;
+    padding: 3px 9px;
+    background: var(--surface-3);
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    transition: color 0.15s, background 0.15s;
+}
+
+.rec-card:hover .genre-tag {
+    background: rgba(220,60,60,0.06);
+    border-color: rgba(220,60,60,0.15);
+}
+
+/* ── Score Footer ────────────────────────────────────────── */
+.rec-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 4px;
+    border-top: 1px solid var(--border);
+}
+
+.score-dots {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+}
+
+.score-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+/* ── Empty / Error States ────────────────────────────────── */
+.no-results {
+    grid-column: 1 / -1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 48px 32px;
+    text-align: center;
+    color: var(--text-dim);
+}
+
+.no-results p { font-size: 0.95rem; }
+
+.no-results-hint {
+    font-size: 0.8rem !important;
+    color: var(--text-muted) !important;
+    margin-top: 8px;
+}
+
+.no-results--error {
+    border-color: rgba(220,60,60,0.25);
+    background: rgba(220,60,60,0.04);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 720px) {
+    #boxes {
+        grid-template-columns: 1fr;
+    }
+
+    .controls-row {
+        grid-column: 1;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #submit-btn {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+    }
+
+    .filter-divider {
+        width: 100%;
+        height: 1px;
+    }
+
+    #Recommendations {
+        grid-column: 1;
+    }
+
+    #recommendation-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    main { padding: 24px 16px 60px; }
+    #boxes { gap: 14px; }
+    h1 { font-size: clamp(2.8rem, 14vw, 5rem); }
+}
