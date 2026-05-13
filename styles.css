@@ -160,6 +160,10 @@ main {
 }
 
 /* ── Input Sections ──────────────────────────────────────── */
+input, select, textarea {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
 #Previously-Viewed,
 #Genre-Preferences {
     background: var(--surface);
