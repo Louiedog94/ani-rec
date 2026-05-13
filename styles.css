@@ -179,7 +179,7 @@ input, select, textarea {
 }
 
 section h2 {
-    font-family: 'PerfectAction', 'Syne', sans-serif;
+    ont-family: 'Inter', 'Segoe UI', sans-serif !important;
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.18em;
@@ -203,7 +203,7 @@ textarea {
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     color: var(--text);
-    font-family: 'PerfectAction', 'Syne', sans-serif;
+    ont-family: 'Inter', 'Segoe UI', sans-serif !important;
     font-size: 0.875rem;
     resize: vertical;
     outline: none;
