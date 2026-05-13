@@ -7,7 +7,7 @@
 /* ── Custom Font ─────────────────────────────────────────── */
 @font-face {
     font-family: 'PerfectAction';
-    src: url("fonts/PerfectActionDemo-drdqX.woff2") format("woff2");
+    src: url("/PerfectActionDemo-drdqX.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -89,7 +89,7 @@ header {
     justify-content: center;
 
     background-color: var(--bg);
-    background-image: url("images/angry-panda-logo--812-1536x1025.jpg");
+    background-image: url("/angry-panda-logo--812-1536x1025.jpg");
     background-size: cover;
     background-position: center 30%;
     background-repeat: no-repeat;
